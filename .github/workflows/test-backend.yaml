@@ -1,0 +1,24 @@
+name: Reusable workflow test-backend
+
+on:
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+      secret:
+        token:
+          required: true
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name:
+        run: |
+          echo "actions/checkout@v4 - checkout state completed for test-backend"
+        with:
+          repo-token: ${{ secrets.token }}
+          configuration-path: ${{ inputs.config-path }}
+
+
