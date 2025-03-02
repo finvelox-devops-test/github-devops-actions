@@ -1,0 +1,12 @@
+name: Reusable workflow test-backend
+
+on:
+  workflow_call:
+    
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name:
+        run: |
+          echo "actions/checkout@v4 - checkout state completed for test-backend"
