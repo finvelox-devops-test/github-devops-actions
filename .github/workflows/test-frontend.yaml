@@ -3,21 +3,26 @@ name: Reusable workflow test-frontend
 on:
   workflow_call:
     inputs:
-      config-path:
+      namespace:
         required: true
-        type: string
-      secret:
-        token:
-          required: true
-
+    secrets:
+      kubeconfig:
+        required: true
+        
 jobs:
   triage:
     runs-on: ubuntu-latest
     steps:
-      - name:
-        run: |
-          echo "actions/checkout@v4 - checkout state completed for test-frontend"
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
         with:
-          repo-token: ${{ secrets.token }}
-          configuration-path: ${{ inputs.config-path }}
-
+          version: 'latest'
+        id: install
+      - name: Set kube context
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.CS_TEST_K8S_CONFIG }}
+      - name: Deploy to kubernetes
+        run: |
+          ${{ steps.install.outputs.kubectl-path}} get po -n $DEPLOY_NAME_SPACE
