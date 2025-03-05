@@ -9,7 +9,7 @@ on:
     secrets:
       kubeconfig:
         required: true
-        type:
+        type: string
         
 jobs:
   triage:
