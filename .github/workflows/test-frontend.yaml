@@ -13,4 +13,6 @@ jobs:
           version: 'latest'
       - name: Deploy to kubernetes
         run: |
-          echo "kubectl get po -n ${{ env.DEPLOY_NAME_SPACE }}"
+          echo "kubectl get po -n $DEPLOY_NAME_SPACE"
+        env:
+          DEPLOY_NAME_SPACE: ${{ env.DEPLOY_NAME_SPACE }}
