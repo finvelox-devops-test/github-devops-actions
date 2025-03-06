@@ -2,7 +2,7 @@ name: Reusable workflow test-frontend
 
 on:
   workflow_call:
-    
+
 jobs:
   triage:
     runs-on: ubuntu-latest
@@ -13,4 +13,4 @@ jobs:
           version: 'latest'
       - name: Deploy to kubernetes
         run: |
-          echo "kubectl get po -n $DEPLOY_NAME_SPACE"
+          echo "kubectl get po -n ${{ env.DEPLOY_NAME_SPACE }}"
