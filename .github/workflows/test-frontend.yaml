@@ -2,7 +2,10 @@ name: Reusable workflow test-frontend
 
 on:
   workflow_call:
-
+    inputs:
+      deploy_name_space:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -14,4 +17,4 @@ jobs:
           version: 'latest'
       - name: Deploy to kubernetes
         run: |
-          echo "kubectl get po -n ${{ env.DEPLOY_NAME_SPACE }}"
+          echo "kubectl get po -n ${{ inputs.deploy_name_space }}"
