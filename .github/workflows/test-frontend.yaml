@@ -24,7 +24,7 @@ jobs:
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.CLUSTER_ADMIN_CONFIG }}
-        run: echo ${{ secrets.CLUSTER_ADMIN_CONFIG }}
       - name: Deploy to kubernetes
         run: |
           echo "kubectl get po -n ${{ inputs.deploy_name_space }}"
+          echo "${{ secrets.CLUSTER_ADMIN_CONFIG }}"
