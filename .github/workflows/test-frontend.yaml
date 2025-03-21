@@ -2,6 +2,10 @@ name: Reusable workflow test-frontend
 
 on:
   workflow_call:
+    secrets:    
+      kubeconfig:
+        required: true
+        type: string
     inputs:
       deploy_name_space:
         required: true
@@ -15,6 +19,12 @@ jobs:
         uses: azure/setup-kubectl@v4
         with:
           version: 'latest'
+      - name: Set kube context@v4
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.CLUSTER_ADMIN_CONFIG }}
+        run: echo ${{ secrets.CLUSTER_ADMIN_CONFIG }}
       - name: Deploy to kubernetes
         run: |
           echo "kubectl get po -n ${{ inputs.deploy_name_space }}"
