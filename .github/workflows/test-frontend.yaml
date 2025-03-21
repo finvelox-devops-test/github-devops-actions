@@ -5,7 +5,6 @@ on:
     secrets:    
       kubeconfig:
         required: true
-        type: string
     inputs:
       deploy_name_space:
         required: true
