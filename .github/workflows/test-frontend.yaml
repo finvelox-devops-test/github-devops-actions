@@ -6,6 +6,9 @@ on:
       deploy_name_space:
         required: true
         type: string
+    secrets:
+      kubeconfig:
+        required: true
 
 jobs:
   build:
@@ -19,7 +22,7 @@ jobs:
         uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
-          kubeconfig: ${{ secrets.TEST }}
+          kubeconfig: ${{ secrets.kubeconfig }}
       - name: Deploy to kubernetes
         run: |
           echo "kubectl get po -n ${{ inputs.deploy_name_space }}"
