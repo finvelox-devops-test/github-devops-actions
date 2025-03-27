@@ -24,3 +24,4 @@ jobs:
         run: |
           echo "kubectl get po -n ${{ inputs.deploy_name_space }}"
           echo "${{ secrets.CLUSTER_ADMIN_CONFIG }}"
+
