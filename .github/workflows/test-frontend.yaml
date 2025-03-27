@@ -19,7 +19,7 @@ jobs:
         uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
-          kubeconfig: ${{ secrets.TEST }}
+          kubeconfig: ${{ secrets.TEST_2 }}
       - name: Deploy to kubernetes
         run: |
           echo "kubectl get po -n ${{ inputs.deploy_name_space }}"
