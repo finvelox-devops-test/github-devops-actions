@@ -1,0 +1,32 @@
+name: Container Image Build
+on:
+  workflow_call:
+    inputs:
+      img_name:
+        required: true
+      img_ver:
+        required: true
+      rootpath:
+        required: true
+    secrets:
+      registry:
+        required: true
+
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with: 
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
